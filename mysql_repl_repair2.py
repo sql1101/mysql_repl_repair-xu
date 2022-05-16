@@ -344,7 +344,7 @@ class MysqlReplRepair(Thread):
 	def change_repl_worker_count(self,type):
 		"set slave slave_parallel_workers to 0 or to multi"
 
-		ret = self.execsql("select * from performance_schema.global_variables where VARIABLE_NAME='slave_parallel_workers'")
+		ret = self.execsql("select @@slave_parallel_workers")
 
 		if ret is None:
 			return
