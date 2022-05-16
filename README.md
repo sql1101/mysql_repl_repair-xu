@@ -36,6 +36,11 @@ replace into table set a=xxx,b=xxx,c=xxx
 * 目前只支持ROW格式binlog且为FULL row image格式
 * mysql_repl_repair.py不支持修复json，空间数据类型的表造成的复制异常，但mysql_repl_repair2.py支持，mysql_repl_repair2.py解析mysql5.6之后的时间(支持微妙)字段时有bug，已提交issue给python-mysql-replication项目
 
+#### 改进
+======
+1. 脚本使用pymsql作为mysql 连接库,不使用mysqldb 这个老库
+2. 修复了若干个BUG,使用脚本更加稳定
+
 USAGE
 ===========
 ```shell
@@ -235,9 +240,6 @@ slave_exec_mode为IDEMPOTENT时，从库slave的表现是遇到insert出错时re
 =====
 杜明友、赵天元
 
-
 问题反馈方式
 ================
 * 提issue
-* qq群: 116121252
-* email: dukope@163.com,tianyuanzhao@126.com
