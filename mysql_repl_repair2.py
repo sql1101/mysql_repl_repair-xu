@@ -7,7 +7,7 @@
 #1062: HA_ERR_FOUND_DUPP_KEY (duplicate key)
 #1032: HA_ERR_KEY_NOT_FOUND (key not found)
 
-import MySQLdb.cursors
+import pymysql.cursors
 import datetime
 import sys,os,fcntl,time,decimal,struct,signal,logging
 from optparse import OptionParser
@@ -197,8 +197,8 @@ class MysqlReplRepair(Thread):
 		"db connection fun, return a db cursor"
 
 		try:
-			conn = MySQLdb.connect(user=self.user, passwd=self.password, host=ip,
-				port=int(port), db='mysql',cursorclass=MySQLdb.cursors.DictCursor)
+			conn = pymysql.connect(user=self.user, passwd=self.password, host=ip,
+				port=int(port), db='mysql',cursorclass=pymysql.cursors.DictCursor)
 			conn.autocommit(True)
 
 			return conn
@@ -344,7 +344,7 @@ class MysqlReplRepair(Thread):
 	def change_repl_worker_count(self,type):
 		"set slave slave_parallel_workers to 0 or to multi"
 
-		ret = self.execsql("select * from information_schema.global_variables where VARIABLE_NAME='slave_parallel_workers'")
+		ret = self.execsql("select * from performance_schema.global_variables where VARIABLE_NAME='slave_parallel_workers'")
 
 		if ret is None:
 			return
