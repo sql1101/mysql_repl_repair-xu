@@ -238,7 +238,7 @@ slave_exec_mode为IDEMPOTENT时，从库slave的表现是遇到insert出错时re
 
 作者
 =====
-杜明友、赵天元
+杜明友、赵天元,许绍惠
 
 问题反馈方式
 ================
